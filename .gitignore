@@ -136,6 +136,9 @@ tags
 #VS code
 .vscode
 
+#pycharm
+.idea
+
 #teamcity      
 .teamcity/*.iml      
 .teamcity/target/

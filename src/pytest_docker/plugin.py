@@ -181,7 +181,11 @@ def docker_services(docker_compose_file, docker_compose_project_name, docker_cle
     """Start all services from a docker compose file (`docker-compose up`).
     After test are finished, shutdown all services (`docker-compose down`)."""
 
-    with get_docker_services(
-        docker_compose_file, docker_compose_project_name, docker_cleanup
-    ) as docker_service:
-        yield docker_service
+    # don't run containers if docker_compose_file is None. Overwrite docker_compose_file to not run dockers.
+    if docker_compose_file is not None:
+        with get_docker_services(
+            docker_compose_file, docker_compose_project_name, docker_cleanup
+        ) as docker_service:
+            yield docker_service
+    else:
+        yield None
